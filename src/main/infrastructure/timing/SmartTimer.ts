@@ -15,7 +15,8 @@ export class SmartTimer implements ISmartTimer {
         return this;
     }
 
-
+    // Connascence of Execution
+    // ---- outisde this class someone must know "waitMillisecond" has to be called before "beforeDoing"
     beforeDoing(notifier: INotifier, datagrams: Array<string>): ISmartTimer {
         const self = this;
         this.task = new class implements TimerTask {

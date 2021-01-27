@@ -31,11 +31,15 @@ export class Direction {
 
     turnLeft(): Direction {
         let previousValue: number = this.value - 1;
+        //Connascence of Algorithm 
+        // ---- outisde of this function someone already knows the way to wrap coordinates, no need to implement each time
         return Direction.valueOf((previousValue % 4 + 4) % 4);
     }
 
     turnRight(): Direction {
         let previousValue = this.value + 1;
+        //Connascence of Algorithm 
+        // ---- outisde of this function someone already knows the way to wrap coordinates, no need to implement each time
         return Direction.valueOf((previousValue % 4 + 4) % 4);
     }
 

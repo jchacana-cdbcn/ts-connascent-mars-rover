@@ -5,6 +5,8 @@ export class Coordinate {
     x: number;
     y: number;
 
+    //Connascence of Order 
+    // ---- outisde of this function someone must knows the order of the ints: first x, then y
     constructor(x: number, y: number) {
         this.x = x;
         this.y = y;

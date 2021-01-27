@@ -33,8 +33,12 @@ export class MarsRoverReceiver implements IWriteToServiceBus {
             return;
         }
 
-        this.smartTimer.waitMillisecond(this.MAX_DELAY_MILLISECONDS)
+        this.smartTimer
+            .waitMillisecond(this.MAX_DELAY_MILLISECONDS)
             .beforeDoing(this.notifier, this.datagrams);
+        // Connascence of Timing 
+        // ---- outisde this class someone must know "how much to wait" for a notified datagram message
+      
     }
 
     private notifyMessage2(datagrams: Array<string>): void {

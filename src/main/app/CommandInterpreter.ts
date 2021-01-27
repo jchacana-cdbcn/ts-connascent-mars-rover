@@ -10,7 +10,9 @@ import {StartingPositionCommand} from "../commands/StartingPositionCommand";
 
 export class CommandInterpreter {
     private letterToDirection: Map<string, Direction> = new Map([
-        ["N", Direction.NORTH()],
+        ["N", Direction.NORTH()], 
+        // Connascence of Meaning 
+        // ---- outside this class someone must know "N" means "North" 
         ["E", Direction.EAST()],
         ["S", Direction.SOUTH()],
         ["W", Direction.WEST()]
@@ -18,7 +20,9 @@ export class CommandInterpreter {
 
     translate(commands: string): Array<ICommand> {
         let allCommands = new Array<ICommand>();
-        allCommands.push(this.getInitializationCommand(commands));
+        allCommands.push(this.getInitializationCommand(commands)); 
+        // Connascence of Order 
+        // ---- outisde this class someone must know "Initialisation commands" come before "Movement commands"
         allCommands.push(this.getStartingPositionCommand(commands));
         allCommands.push(...this.getMovementCommands(commands));
 
@@ -28,9 +32,13 @@ export class CommandInterpreter {
     private getMovementCommands(commands: string): ICommand[] {
         let movementCommands = new Array<ICommand>();
         let lines: string[] = commands.split("\n");
+        // Connascence of Value 
+        // ---- outside this class someone must know how "commands" is formatted inside
         for (let command of Array.from(lines[2])) {
             switch (command) {
                 case 'L':
+                    // Connascence of Meaning 
+                    // ---- outside this class someone must know "L" means "Left"
                     movementCommands.push(new TurnLeftCommand());
                     break;
                 case 'F':
@@ -47,12 +55,16 @@ export class CommandInterpreter {
     private getInitializationCommand(commands: string): InitializationCommand {
         let lines: string[] = commands.split("\n");
         let topRight: string[] = lines[0].split(" ");
+        // Connascence of Value 
+        // ---- outside this class someone knows how "commands" is formatted inside
         return new InitializationCommand(new Coordinate(parseInt(topRight[0]), parseInt(topRight[1])));
     }
 
     private getStartingPositionCommand(commands: string): StartingPositionCommand {
         let lines: string[] = commands.split("\n");
         let coords: string[] = lines[1].split(" ");
+        // Connascence of Value 
+        // ---- outside this class someone knows how "commands" is formatted inside
 
         let coordinate: Coordinate = new Coordinate(parseInt(coords[0]), parseInt(coords[1]));
         let direction: Direction = <Direction>this.letterToDirection.get(coords[2]);
