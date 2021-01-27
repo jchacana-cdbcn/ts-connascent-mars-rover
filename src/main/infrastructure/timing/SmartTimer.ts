@@ -8,6 +8,9 @@ export class SmartTimer implements ISmartTimer {
     private isRunning: boolean = false;
     private timer: Timer = new Timer();
     private task!: TimerTask;
+
+    // Connascence of Identity
+    // ---- outisde this class someone must know "public field notifier" cannot be reset during timer execution
     public  notifier: INotifier = new class implements INotifier {
         notifyMessage(data: Array<string>): void {
         }
