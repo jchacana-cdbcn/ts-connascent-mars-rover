@@ -8,6 +8,10 @@ export class SmartTimer implements ISmartTimer {
     private isRunning: boolean = false;
     private timer: Timer = new Timer();
     private task!: TimerTask;
+    public  notifier: INotifier = new class implements INotifier {
+        notifyMessage(data: Array<string>): void {
+        }
+    }
 
     waitMillisecond(milliseconds: number): ISmartTimer {
         this.reset();
@@ -15,8 +19,8 @@ export class SmartTimer implements ISmartTimer {
         return this;
     }
 
-
     beforeDoing(notifier: INotifier, datagrams: Array<string>): ISmartTimer {
+        this.notifier = notifier;
         const self = this;
         this.task = new class implements TimerTask {
             cancel(): void {
